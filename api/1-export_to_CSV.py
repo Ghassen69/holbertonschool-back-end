@@ -6,7 +6,7 @@ import requests
 import sys
 
 if __name__ == "__main__":
-
+    """gather data from an api"""
     user_id = sys.argv[1]
     response = requests.get(f"https://jsonplaceholder.typicode.com/users/{user_id}")
     username = response.json().get('username')
