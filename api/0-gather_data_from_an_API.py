@@ -7,12 +7,11 @@ import sys
 if __name__ == '__main__':
     completed = 0
     totalTasks = 0
-    if len(sys.argv) == 2 and sys.argv[1].isdigit():
-        employee_id = int(sys.argv[1])
-        user_response = requests.get("https://jsonplaceholder.typicode.com/users/{}"
-                        .format(employee_id))
-        name = user_response.json().get('name')
-        todos_response = requests.get('https://jsonplaceholder.typicode.com/todos')
+    employee_id = int(sys.argv[1])
+    user_response = requests.get("https://jsonplaceholder.typicode.com/users/{}"
+                                 .format(employee_id))
+    name = user_response.json().get('name')
+    todos_response = requests.get('https://jsonplaceholder.typicode.com/todos')
 
     for task in todos_response.json():
         if task.get('userId') == int(employee_id):
