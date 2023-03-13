@@ -1,13 +1,13 @@
 #!/usr/bin/python3
-"""gather data mechni lil waynbe
-azsakzaklhzazamlkjzaz api"""
+
+"""Gather data for Lil Wayne using an API."""
 
 import csv
 import requests
 import sys
 
+
 if __name__ == "__main__":
-    """gather data from an api"""
     user_id = sys.argv[1]
     response = requests.get(f"https://jsonplaceholder.typicode.com/users/{user_id}")
     username = response.json().get('username')
@@ -25,3 +25,4 @@ if __name__ == "__main__":
                 task_completed = str(task.get('completed'))
                 task_title = task.get('title')
                 writer.writerow([user_id, username, task_completed, task_title])
+
