@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-"""gather data 
-api"""
+"""gather data mechni lil waynbe
+azsakzaklhzazamlkjzaz api"""
 
 import csv
 import requests
