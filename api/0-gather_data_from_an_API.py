@@ -5,22 +5,23 @@ import requests
 import sys
 
 if __name__ == '__main__':
-    completed = 0
-    totalTasks = 0
-    employee_id = int(sys.argv[1])
-    user_response = requests.get("https://jsonplaceholder.typicode.com/users/{}"
-                                 .format(employee_id))
-    name = user_response.json().get('name')
-    todos_response = requests.get('https://jsonplaceholder.typicode.com/todos')
+    employee_id = sys.argv[1]
+    employee = requests.get("https://jsonplaceholder.typicode.com/users/{}"
+                            .format(employee_id))
 
-    for task in todos_response.json():
+    employee_name = employee.json().get('name')
+
+    tasks = requests.get('https://jsonplaceholder.typicode.com/todos')
+    completed_count = 0
+    total_tasks_count = 0
+    for task in tasks.json():
         if task.get('userId') == int(employee_id):
-            totalTasks += 1
+            total_tasks_count += 1
             if task.get('completed'):
-                completed += 1
+                completed_count += 1
 
-    print('Employee {} is done with tasks({}/{}):'
-          .format(name, completed, totalTasks))
+    print('Employee {} has completed ({}/{}) tasks:'
+          .format(employee_name, completed_count, total_tasks_count))
 
-    print('\n'.join(["\t " + task.get('title') for task in todos_response.json()
+    print('\n'.join(["\t " + task.get('title') for task in tasks.json()
           if task.get('userId') == int(employee_id) and task.get('completed')]))
