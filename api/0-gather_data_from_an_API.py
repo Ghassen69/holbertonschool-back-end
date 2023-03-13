@@ -14,11 +14,7 @@ if __name__ == '__main__':
         name = user_response.json().get('name')
         todos_response = requests.get('https://jsonplaceholder.typicode.com/todos')
 
-        if user_response.ok and todos_response.ok:
-            user_data = user_response.json()
-            todos_data = todos_response.json()
-
-    for task in todos_data.json():
+    for task in todos_response.json():
         if task.get('userId') == int(employee_id):
             totalTasks += 1
             if task.get('completed'):
@@ -27,5 +23,5 @@ if __name__ == '__main__':
     print('Employee {} is done with tasks({}/{}):'
           .format(name, completed, totalTasks))
 
-    print('\n'.join(["\t " + task.get('title') for task in todos_data.json()
+    print('\n'.join(["\t " + task.get('title') for task in todos_response.json()
           if task.get('userId') == int(employee_id) and task.get('completed')]))
