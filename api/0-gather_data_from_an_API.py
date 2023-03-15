@@ -32,4 +32,3 @@ if __name__ == "__main__":
     ]
     formatted_output = '\n'.join(formatted_titles)
     print(formatted_output)
-
