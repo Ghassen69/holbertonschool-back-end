@@ -1,27 +1,21 @@
 #!/usr/bin/python3
-"""Gather data using an API."""
+"""Fetches and writes to-do list for a given employee ID"""
 
-import csv
 import requests
 import sys
 
-
 if __name__ == "__main__":
-    user_id = sys.argv[1]
-    resp = requests.get("https://jsonplaceholder.typicode.com/users/{}"
-                        .format(user_id))
-    username = resp.json().get('username')
+    api_url = "https://jsonplaceholder.typicode.com/"
+    user = requests.get(api_url + "users/{}".format(sys.argv[1])).json()
+    todos = requests.get(
+        api_url + "todos", params={"userId": sys.argv[1]}).json()
 
-    todos = requests.get('https://jsonplaceholder.typicode.com/todos')
-    tasks = todos.json()
+    file_name = str(eval(sys.argv[1])) + ".csv"
 
-    filename = f"{user_id}.csv"
-    with open(filename, mode='w', newline='') as file:
-        writer = csv.writer(file, delimiter=',', quotechar='"',
-                            quoting=csv.QUOTE_ALL)
-
-        for task in tasks:
-            if task.get('userId') == int(user_id):
-                task_completed = str(task.get('completed'))
-                task_title = task.get('title')
-                writer.writerow([user_id, username, task_completed, task_title])
+    with open(file_name, "x") as f:
+        for task in todos:
+            row = '"' + str(user.get("id")) + '","' + str(
+                user.get("username")) + '","' + str(
+                    task.get("completed")) + '","' + str(
+                        task.get("title")) + '"\n'
+            f.write(row)
