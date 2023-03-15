@@ -5,12 +5,12 @@ import requests
 from sys import argv
 
 if __name__ == "__main__":
-    employee_id = int(argv[1])
+    e_id = int(argv[1])
     user = requests.get(
-        "https://jsonplaceholder.typicode.com/users/{}".format(employee_id)
+        "https://jsonplaceholder.typicode.com/users/{}".format(e_id)
     ).json()
     tasks = requests.get(
-        "https://jsonplaceholder.typicode.com/todos?userId={}".format(employee_id)
+        "https://jsonplaceholder.typicode.com/todos?userId={}".format(e_id)
     ).json()
     completed_tasks = []
     for task in tasks:
@@ -23,4 +23,3 @@ if __name__ == "__main__":
     )
     for task in completed_tasks:
         print("\t {}".format(task))
-
