@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""get data from a api"""
+"""Returns a list of completed tasks for a given employee ID"""
 
 import requests
 from sys import argv
@@ -10,15 +10,17 @@ if __name__ == "__main__":
         "https://jsonplaceholder.typicode.com/users/{}".format(employee_id)
     ).json()
     tasks = requests.get(
-        "https://jsonplaceholder.typicode.com/todos?userId={}"
-        .format(employee_id)
+        "https://jsonplaceholder.typicode.com/todos?userId={}".format(employee_id)
     ).json()
     completed_tasks = []
     for task in tasks:
         if task.get("completed") is True:
             completed_tasks.append(task.get("title"))
-    print("Employee {} is done with tasks({}/{}):".format(
-        user.get("name"), len(completed_tasks), len(tasks)))
+    print(
+        "Employee {} is done with tasks({}/{}):".format(
+            user.get("name"), len(completed_tasks), len(tasks)
+        )
+    )
     for task in completed_tasks:
         print("\t {}".format(task))
 
