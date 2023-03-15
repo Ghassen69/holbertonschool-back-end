@@ -9,8 +9,9 @@ import sys
 
 if __name__ == "__main__":
     user_id = sys.argv[1]
-    response = requests.get(f"https://jsonplaceholder.typicode.com/users/{user_id}")
-    username = response.json().get('username')
+    resp = requests.get("https://jsonplaceholder.typicode.com/users/{}"
+                        .format(user_id))
+    username = resp.json().get('username')
 
     todos = requests.get('https://jsonplaceholder.typicode.com/todos')
     tasks = todos.json()
@@ -25,4 +26,3 @@ if __name__ == "__main__":
                 task_completed = str(task.get('completed'))
                 task_title = task.get('title')
                 writer.writerow([user_id, username, task_completed, task_title])
-

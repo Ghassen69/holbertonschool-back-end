@@ -24,5 +24,13 @@ if __name__ == '__main__':
     print('Employee {} has completed ({}/{}) tasks:'
           .format(employee_name, completed_count, total_tasks_count))
 
-    print('\n'.join(["\t " + task.get('title') for task in tasks.json()
-          if task.get('userId') == int(employee_id) and task.get('completed')]))
+    filtered_tasks = [
+        task for task in tasks.json()
+        if task.get('userId') == int(employee_id) and task.get('completed')
+    ]
+    formatted_titles = [
+        "\t " + task.get('title')
+        for task in filtered_tasks
+    ]
+    formatted_output = '\n'.join(formatted_titles)
+    print(formatted_output)
