@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""gather data from an api"""
+"""get data from a api"""
 
 import requests
 from sys import argv
@@ -21,3 +21,4 @@ if __name__ == "__main__":
         user.get("name"), len(completed_tasks), len(tasks)))
     for task in completed_tasks:
         print("\t {}".format(task))
+
