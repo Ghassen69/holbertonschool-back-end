@@ -19,4 +19,3 @@ if __name__ == "__main__":
     json_file_name = sys.argv[1] + ".json"
     with open(json_file_name, "w") as json_file:
         json.dump(tasks_dict, json_file)
-
