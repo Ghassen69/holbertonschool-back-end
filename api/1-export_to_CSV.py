@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""Gather data for Lil Wayne using an API."""
+"""Gather data using an API."""
 
 import csv
 import requests
