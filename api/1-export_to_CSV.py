@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """Gather data using an API."""
 
 import csv
