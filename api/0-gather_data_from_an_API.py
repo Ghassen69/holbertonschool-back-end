@@ -5,21 +5,21 @@ import requests
 from sys import argv
 
 if __name__ == "__main__":
-    e_id = int(argv[1])
+    employee = int(argv[1])
     user = requests.get(
-        "https://jsonplaceholder.typicode.com/users/{}".format(e_id)
+        "https://jsonplaceholder.typicode.com/users/{}".format(employee)
     ).json()
-    tasks = requests.get(
-        "https://jsonplaceholder.typicode.com/todos?userId={}".format(e_id)
+    TODO = requests.get(
+        "https://jsonplaceholder.typicode.com/todos?userId={}".format(employee)
     ).json()
-    completed_tasks = []
-    for task in tasks:
+    task_done = []
+    for task in TODO:
         if task.get("completed") is True:
-            completed_tasks.append(task.get("title"))
+            task_done.append(task.get("title"))
     print(
         "Employee {} is done with tasks({}/{}):".format(
-            user.get("name"), len(completed_tasks), len(tasks)
+            user.get("name"), len(task_done), len(TODO)
         )
     )
-    for task in completed_tasks:
-        print("\t {}".format(task))
+    for done in task_done:
+        print("\t {}".format(done))
